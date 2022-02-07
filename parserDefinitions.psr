@@ -1,0 +1,11 @@
+ADD || inc rbx\n
+SUBTRACT || dec rbx\n
+PTR_LEFT || dec rax\n
+PTR_RIGHT || inc rax\n
+START_LOOP || ltagID:\ncmp rbx, 0\nje ltagIDend\n
+END_LOOP || jmp ltagID\nltagIDend:\n
+PRINT || mov rdx, 0\nmov dl, bl\nmov rcx, print_byte\ncall printf\n
+SCAN || mov rdx, rax\nmov rcx, scan_byte\ncall scanf\n
+ADD|SUBTRACT,PTR_RIGHT|PTR_LEFT || mov [rel rax], bl\n
+ADD|SUBTRACT,START_LOOP|END_LOOP || mov [rel rax], bl\n
+PTR_LEFT|PTR_RIGHT,&!PTR_LEFT|!PTR_RIGHT || mov bl, byte [rel rax]\n
